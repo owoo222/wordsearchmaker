@@ -47,22 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-  document
-    .getElementById("playbutton_check")
-    .addEventListener("click", function () {
-      const gameCode = document.getElementById("gameCode").value;
-      fetch(`/games/${gameCode}`)
-        .then((response) => response.json())
-        .then((data) => {
-          displayGameInfo(data);
-          generatePuzzle(data.wordlist);
-          displayWordList(data.wordlist);
-          enableClickEffect(data.wordlist);
-          wordListGlobal = data.wordlist; // wordlist를 전역 변수에 저장
-          startTime = new Date(); // 게임 시작 시간을 다시 설정
-        });
-    });
-
   function displayGameInfo(game) {
     const infoDiv = document.getElementById("gameInfo");
     infoDiv.innerHTML = `Title: ${game.title}<br>Description: ${game.description}`;
@@ -179,10 +163,10 @@ document.addEventListener("DOMContentLoaded", function () {
             displayGameInfo(data);
             generatePuzzle(data.wordlist);
             displayWordList(data.wordlist);
-            enableClickEffect(data.wordlist); // 수정된 부분: wordlist를 올바르게 전달
-            wordlist = data.wordlist; // 전역 wordlist 변수에 할당
-            startTime = new Date(); // 게임 시작 시간을 다시 설정
-            clearInterval(timerInterval); // 이전 타이머가 있다면 중지
+            enableClickEffect(data.wordlist);
+            wordlist = data.wordlist;
+            startTime = new Date();
+            clearInterval(timerInterval);
             timerInterval = setInterval(updateTimerDisplay, 100);
           });
       });
@@ -191,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (e.target.className.includes("tile")) {
         const tile = e.target;
 
-        // "correct" 클래스가 적용된 타일도 포함하여 처리할 수 있도록 조건 수정
+        // "correct" 클래스가 적용된 타일도 포함하여 처리할 수 있도록 해줌
         if (!selectedTiles.includes(tile)) {
           // 타일을 선택 목록에 추가
           selectedTiles.push(tile);
@@ -207,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         }
 
-        // 선택된 타일로 단어 생성 및 로직 실행은 이전과 동일
+        // 선택된 타일로 단어 생성 및 로직 실행
         const selectedWord = selectedTiles.map((t) => t.textContent).join("");
         console.log("선택된 단어: ", selectedWord);
 
@@ -254,6 +238,5 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // 기존 enableDragEffect 함수 대신 enableClickEffect 함수를 호출합니다.
-  enableClickEffect(wordlist); // wordlist는 알맞게 전달되어야 합니다.
+  enableClickEffect(wordlist);
 });
