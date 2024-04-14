@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>게임 조회하기</title>
+    <style>
+      .found {
+        color: #90ee90; /* 예시 색상 */
+      }
+      .tile {
+        width: 60px;
+        height: 60px;
+        display: inline-block;
+        border: 1px solid #000;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 40px;
+        font-size: 20px;
+      }
+      .correct {
+        background-color: #90ee90; /* 정답 타일의 배경색 */
+      }
+
+      .highlight {
+        background-color: yellow;
+      }
+
+      #puzzleword {
+        display: flex; /* Flex 컨테이너 설정 */
+        justify-content: space-around; /* 자식 요소들 사이에 공간을 균등하게 배분 */
+        align-items: center; /* 자식 요소들을 세로 방향으로 가운데 정렬 */
+      }
+
+      #puzzle,
+      #wordList {
+        flex: 1; /* 각 자식 요소가 Flex 컨테이너 내에서 동일한 공간을 차지하도록 설정 */
+        margin: 10px; /* 요소들 사이의 공간 확보를 위한 마진 설정 */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="title">게임 코드로 조회하기</div>
+    <input type="text" id="gameCode" />
+    <button id="playbutton_check">게임 조회하기</button>
+
+    <h2>게임 정보:</h2>
+    <div id="gameInfo"></div>
+    <div id="puzzleword">
+      <div id="puzzle"></div>
+      <div id="wordList"></div>
+    </div>
+
+    <script src="playgame.js"></script>
+  </body>
+</html>
